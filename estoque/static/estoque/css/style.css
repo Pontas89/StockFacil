@@ -1,0 +1,179 @@
+/*Cores gerais*/
+:root {
+    --cor-fundo: #F5F5FA;
+    --cor-azul-escuro: #24366E;
+    --cor-laranja: #f75026;
+    --cor-cinza: #a4abae;
+    --cor-verde: #74da58;
+}
+
+/*Configurações gerais*/
+body {
+    background-color: var(--cor-fundo);
+    font-family: Arial, sans-serif;
+    color: #333333;
+}
+
+/*Organização principal*/
+.layout-principal {
+    display: flex;
+    min-height: 100vh;
+}
+
+/*Barra superior*/
+.navbar {
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    color: var(--cor-azul-escuro);
+}
+
+/*Menu*/
+.card h5 {
+    color: var(--cor-azul-escuro);
+    font-weight: bold;
+}
+
+/*Menu lateral*/
+.menu-lateral {
+    background-color: var(--cor-azul-escuro);
+    width: 250px;
+    min-width: 250px;
+    min-height: 100vh;
+    padding: 25px 15px;
+    border-radius: 0;
+    color: white;
+    /*Parte importante, personalização full hd 4k pro menu*/
+    position: sticky; /*Visivel pra rolagem*/
+    top: 0; /*fixa o menu*/
+    height: 100vh;
+    align-self: flex-start; /*para não ficar esticado*/
+}
+
+.menu-lateral h5 {
+    color: white;
+    font-weight: bold;
+}
+
+.menu-lateral .nav-link {
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.menu-lateral .nav-link i {
+    margin-right: 10px;
+}
+
+.menu-lateral .nav-link.active, .menu-lateral .nav-link:hover {
+    background-color: var(--cor-laranja);
+    color: white;
+}
+
+/*Area de conteúdo*/
+.conteudo-principal {
+    flex: 1;
+    padding: 30px;
+    min-width: 0;
+}
+
+/*Cabeçalho*/
+header h1 {
+    color: var(--cor-azul-escuro);    
+    font-weight: bold;
+}
+
+.texto-destaque {
+    color: var(--cor-laranja);
+}
+
+/*Cards*/
+.card {
+    border: none;
+    border-radius: 12px;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(36, 54, 110, 0.06);
+}
+
+/*Indicadores estoque*/
+
+.indicador-card {
+    transition: transform 0.2s ease; /*animação aaaa*/
+}
+
+.indicador-card:hover {
+    transform: translateY(-4px); /*animaçãoooo, é pra levantar o card em pixels especificos*/
+}
+
+.indicador-numero {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--cor-azul-escuro);
+    margin-top: 10px;
+}
+
+.indicador-card p {
+    color: var(--cor-cinza);
+    transition: color 0.2s ease;
+}
+
+.indicador-card:hover p {
+    color: var(--cor-laranja); /*muda a cor do texto quando passa o mouse*/
+}
+
+/*Cores icones -> indicadores*/
+.icone-azul {
+    color: #3869ff;
+}
+
+.icone-verde {
+    color: var(--cor-verde);
+}
+
+.icone-amarelo {
+    color: #ffea02;
+}
+
+.icone-vermelho {
+    color: #dc3545;
+}
+
+/*Rodapé*/
+footer {
+    background-color: white;
+    color: #a4abae;
+}
+
+/*Responsividade*/
+
+@media (max-width: 768px) {
+
+    .layout-principal {
+        flex-direction: column; /*para ficar em cima, mudar?*/
+    }
+
+    .menu-lateral {
+        width: 100%;
+        min-width: 100%;
+        min-height: auto;
+        height: auto;
+        position: relative; /*sem ser fixo*/
+        padding: 15px;
+    }
+
+    .menu-lateral .nav {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+    }
+
+    .menu-lateral .nav-link {
+        margin-right: 5px;
+    }
+
+    .conteudo-principal {
+        padding: 15px;
+    }
+
+}
