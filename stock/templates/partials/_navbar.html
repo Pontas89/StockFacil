@@ -1,0 +1,9 @@
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        {# troque courses pelo nome do seu app #}
+        <a href="{% url 'stock:pessoa_list' %}" class="navbar-brand">StockFacil 🛒</a>
+        {% if user.is_authenticated %}
+            <span class="navbar-text text-white">Olá, {{ user.username }}!</span>
+        {% endif %}
+    </div>
+</nav>

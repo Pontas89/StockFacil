@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Pessoas{% endblock %}
+
+{% block content %}
+     <h1>Pessoas</h1>
+    <span>Olá, {{ user.username }}</span>
+    <form method="post" action="{% url 'accounts:logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-sm btn-outline-secondary">Sair</button>
+    </form>
+    {# troque courses pelo nome do seu app #}
+    {% if perms.stock.add_person %}
+        <a href="{% url 'stock:pessoa_create' %}" class="btn btn-warning">Nova pessoa</a>
+    {% endif %}
+
+    <ul>
+        {% for person in object_list %}
+            <li>
+                {{ person.first_name }} {{ person.last_name }}
+                {% if perms.courses.change_course %}
+                    <a href="{% url 'stock:pessoa_update' person.pk %}" class="btn btn-sm btn-primary">Editar</a>
+                {% endif %}
+                {% if perms.courses.delete_course %}
+                    <a href="{% url 'stock:pessoa_delete' person.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>Nenhuma pessoa cadastrada.</li>
+        {% endfor %}
+    </ul>
+
+    {% if is_paginated %}
+        <nav class="d-flex align-items-center gap-2">
+            {% if page_obj.has_previous %}
+                <a href="{% querystring page=page_obj.previous_page_number %}" class="btn btn-sm btn-outline-primary">Anterior</a>
+            {% endif %}
+            <span class="text-muted small">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="{% querystring page=page_obj.next_page_number %}" class="btn btn-sm btn-outline-primary">Próxima</a>
+            {% endif %}
+        </nav>
+    {% endif %}
+{% endblock %}
