@@ -1,6 +1,7 @@
 from django.db import models
 from stock.models import Produto
 
+#entrada e saida - movimentacoes
 class Movimentacao(models.Model):
 
     TIPOS = [

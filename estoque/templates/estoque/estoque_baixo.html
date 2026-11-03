@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{% static 'estoque/css/style.css' %}">
 </head>
+
 <body>
-    
+
     <main class="layout-principal">
 
         <!-- Menu lateral -->
@@ -49,13 +51,20 @@
 
             <!-- Barra superior -->
             <nav class="navbar bg-white shadow-sm rounded">
-
                 <a href="{% url 'dashboard' %}" class="navbar-brand ms-3 fw-bold">
                     <i class="bi bi-box-seam"></i> StockFacil
                 </a>
 
-                <span class="me-3 fw-bold">Olá Administrador!</span>
+                <div class="d-flex align-items-center gap-3">
+                    <!--botão dark mode-->
+                    <button id="tema-toggle" class="btn btn-outline-secondary" type="button" title="Alternar tema"
+                        aria-label="Alternar tema">
+                        <i class="bi bi-moon"></i>
+                    </button>
 
+                    <span class="me-3 fw-bold">Olá Administrador!</span>
+
+                </div>
             </nav>
 
             <!--Cabeçalho-->
@@ -67,7 +76,8 @@
             </header>
 
             <!--Aviso-->
-            <p class="alert alert-warning border-3">Atenção! Confira os produtos que estão com poucas unidades disponíveis</p>
+            <p class="alert alert-warning border-3">Atenção! Confira os produtos que estão com poucas unidades
+                disponíveis</p>
 
             <!--Lista de produtos-->
             <section class="mt-4">
@@ -97,14 +107,16 @@
 
                                 {% for produto in produtos %}
 
-                                <tr>
+                                <tr data-status="baixo">
                                     <td>{{ produto.nome_produto }}</td>
                                     <td>{{ produto.quantidade_produto }}</td>
                                     <td>R$ {{ produto.preco_produto }}</td>
 
-                                    <td><span class="badge text-bg-warning">
-                                        Estoque baixo
-                                    </span></td>
+                                    <td>
+                                        <span class="badge text-bg-warning">
+                                            Estoque baixo
+                                        </span>
+                                    </td>
                                 </tr>
 
                                 {% empty %}
@@ -136,7 +148,7 @@
 
             <!--Rodapé-->
             <footer class="text-center p-3 mt-4">
-                <p class="mb-0">StockFacil - Descrição</p>
+                <p class="mb-0"> &copy; StockFacil - Descrição</p>
             </footer>
 
         </section>
@@ -147,4 +159,5 @@
     <script src="{% static 'estoque/js/script.js' %}"></script>
 
 </body>
+
 </html>

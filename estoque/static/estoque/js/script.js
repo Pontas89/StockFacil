@@ -5,6 +5,7 @@ const pesquisaMovimentacao = document.querySelector("#pesquisa-movimentacao");
 const filtroTipo =document.querySelector("#filtro-tipo");
 const linhasMovimentacao = document.querySelectorAll("tbody tr[data-tipo]");
 
+//Filtro -> movimentacoes
 function filtrarMovimentacoes() {
     if (!pesquisaMovimentacao || ! filtroTipo){
         return;
@@ -36,6 +37,7 @@ if (filtroTipo) {
     filtroTipo.addEventListener("change", filtrarMovimentacoes);
 }
 
+//Filtro -> produtos
 function filtrarProdutos() {
 
     if(!pesquisa || !filtroStatus) {
@@ -68,5 +70,51 @@ if (pesquisa) {
 if (filtroStatus) {
     filtroStatus.addEventListener("change", function() {
         filtrarProdutos();
+    });
+}
+
+//Alternancia de tema
+const botaoTema = document.getElementById('tema-toggle');
+
+//salvar tema
+const temaSalvo = localStorage.getItem('tema') || 'light';
+
+document.documentElement.setAttribute('data-theme', temaSalvo);
+
+//atualizar icone
+function atualizarIconeTema() {
+    if (!botaoTema) return;
+
+    const temaAtual = document.documentElement.getAttribute('data-theme');
+
+    if(temaAtual === 'dark') {
+        botaoTema.innerHTML = '<i class="bi bi-sun"></i>';
+    }
+    else {
+        botaoTema.innerHTML = '<i class="bi bi-moon"></i>';
+    }
+}
+
+atualizarIconeTema();
+
+if (botaoTema) {
+    botaoTema.addEventListener('click', function() {
+        const temaAtual = document.documentElement.getAttribute('data-theme');
+
+        let novoTema;
+
+        if(temaAtual === 'dark') {
+            novoTema = 'light';
+        }
+
+        else {
+            novoTema = 'dark';
+        }
+
+        document.documentElement.setAttribute('data-theme', novoTema);
+
+        localStorage.setItem('tema', novoTema);
+
+        atualizarIconeTema();
     });
 }

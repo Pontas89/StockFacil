@@ -24,7 +24,7 @@ class ProdutoEditar(UpdateView):
     template_name = "stock/produto_update.html"
     #Nome do registro no template: {{ course }},
     context_object_name = "produto"
-    sucess_url = reverse_lazy("stock:produto_listar")
+    success_url = reverse_lazy("stock:produto_listar")
 
 class ProdutoDeletar(DeleteView):
     model = Produto

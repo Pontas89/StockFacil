@@ -3,6 +3,7 @@ from stock.models import Produto
 from .forms import MovimentacaoForm
 from .models import Movimentacao
 
+#dashboard
 def dashboard(request):
     produtos = Produto.objects.all() #busca todos os produtos cadastrados no banco
 
@@ -28,7 +29,7 @@ def dashboard(request):
         'estoque_baixo': estoque_baixo,
         'produtos_esgotados': produtos_esgotados
     })
-
+#movimentacoes
 def movimentacoes(request):
     form = MovimentacaoForm() #formulario VAZIO
 
@@ -64,7 +65,7 @@ def movimentacoes(request):
         'form': form,
         'movimentacoes': movimentacoes
     })
-
+#estoque_baixo
 def estoque_baixo(request):
     produtos = Produto.objects.filter(
         quantidade_produto__gt=0,
