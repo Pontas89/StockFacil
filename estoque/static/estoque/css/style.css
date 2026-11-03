@@ -12,27 +12,13 @@ body {
     background-color: var(--cor-fundo);
     font-family: Arial, sans-serif;
     color: #333333;
+    margin: 0;
 }
 
 /*Organização principal*/
 .layout-principal {
     display: flex;
     min-height: 100vh;
-}
-
-/*Barra superior*/
-.navbar {
-    padding: 15px 0;
-}
-
-.navbar-brand {
-    color: var(--cor-azul-escuro);
-}
-
-/*Menu*/
-.card h5 {
-    color: var(--cor-azul-escuro);
-    font-weight: bold;
 }
 
 /*Menu lateral*/
@@ -54,17 +40,23 @@ body {
 .menu-lateral h5 {
     color: white;
     font-weight: bold;
+    font-size: 22px;
+    padding-left: 10px;
 }
 
 .menu-lateral .nav-link {
+    display: flex;
+    align-items: center;    
+    gap: 10px;
     color: white;
-    padding: 12px;
+    padding: 13px;
     border-radius: 8px;
     margin-bottom: 8px;
+    transition: all 0.2s ease;
 }
 
 .menu-lateral .nav-link i {
-    margin-right: 10px;
+    margin-right: 0px;
 }
 
 .menu-lateral .nav-link.active, .menu-lateral .nav-link:hover {
@@ -72,11 +64,43 @@ body {
     color: white;
 }
 
-/*Area de conteúdo*/
+/*Navegação lateral*/
+.menu-lateral .nav-link:hover {
+    transform: translateX(4px);
+}
+
+/*Links ainda não implementados*/
+.menu-lateral .nav-link.indisponivel {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.menu-lateral .nav-link.indisponivel:hover {
+    background-color: transparent;
+    transform: none;
+}
+
+/*Conteúdo principal*/
 .conteudo-principal {
     flex: 1;
-    padding: 30px;
     min-width: 0;
+    padding: 30px
+}
+
+
+/*Barra superior*/
+.conteudo-principal .navbar {
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.navbar-brand {
+    color: var(--cor-azul-escuro);
+    font-weight: bold;
+}
+
+.navbar-brand:hover {
+    color: var(--cor-laranja)
 }
 
 /*Cabeçalho*/
@@ -97,21 +121,40 @@ header h1 {
     box-shadow: 0 2px 10px rgba(36, 54, 110, 0.06);
 }
 
+.card h5 {
+    color: var(--cor-azul-escuro);
+    font-weight: bold;
+}
+
 /*Indicadores estoque*/
 
 .indicador-card {
-    transition: transform 0.2s ease; /*animação aaaa*/
+    min-height: 150px;
+    border-left: 3px solid var(--cor-azul-escuro); /*faixa azul do lado*/
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /*animação aaaa*/
 }
 
 .indicador-card:hover {
     transform: translateY(-4px); /*animaçãoooo, é pra levantar o card em pixels especificos*/
+    box-shadow: 0 5px 15px rgba(36, 54, 110, 0.12);
+}
+
+.indicador-card .indicador-icone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background-color: #f1f3fb;
+    font-size: 25px;
 }
 
 .indicador-numero {
-    font-size: 32px;
+    font-size: 34px;
     font-weight: bold;
     color: var(--cor-azul-escuro);
-    margin-top: 10px;
+    margin-top: 12px;
 }
 
 .indicador-card p {
@@ -124,6 +167,7 @@ header h1 {
 }
 
 /*Cores icones -> indicadores*/
+
 .icone-azul {
     color: #3869ff;
 }
@@ -133,22 +177,96 @@ header h1 {
 }
 
 .icone-amarelo {
-    color: #ffea02;
+    color: #ffca2c; /*ou #ffea02*/
 }
 
 .icone-vermelho {
     color: #dc3545;
 }
 
+/*Tabela de produtos*/
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th { /*Cabeçalho da tabela e o titulo*/
+    color: var(--cor-azul-escuro);
+    font-weight: bold;
+    background-color: #f8f9fc;
+    padding: 15px;
+}
+
+.table tbody td { /*Produtos e as info*/
+    padding: 15px;
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background-color: #f5f6fc;
+}
+
+/*Alertas de estoque*/
+
+/*produto com estoque baixo*/
+.table tbody tr[data-status="baixo"] td {
+    background-color: #fff9e6;
+}
+
+.table tbody tr[data-status="baixo"]:hover td {
+    background-color: #fff0c2;
+}
+
+/*produto esgotado*/
+.table tbody tr[data-status="esgotado"] td {
+    background-color: #fff0f0;
+}
+
+.table tbody tr[data-status="esgotado"]:hover td {
+    background-color: #ffdddd;
+}
+
+/*Botões e campos*/
+
+.btn-primary { /*Botão cadastrar produto*/
+    background-color: var(--cor-azul-escuro);
+    border-color: var(--cor-azul-escuro);
+}
+
+.btn-primary:hover {
+    background-color: var(--cor-laranja);
+    border-color: var(--cor-laranja);
+}
+
+.btn {
+    border-radius: 8px;
+    padding: 10px 16px;
+    transition: all 0.2s ease;
+}
+
+.form-control, .form-select { /*Pesquisa e status*/
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.form-control:focus, .form-select:focus {  /*Campo "Todos os status" selecionado*/
+    border-color: var(--cor-azul-escuro);
+    box-shadow: 0 0 0 0.2rem rgba(36, 54, 110, 0.15);
+}
+
 /*Rodapé*/
 footer {
     background-color: white;
     color: #a4abae;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 25px;
 }
 
 /*Responsividade*/
 
-@media (max-width: 768px) {
+@media (max-width: 768px) { /*Para telas menores, até 768px*/
 
     .layout-principal {
         flex-direction: column; /*para ficar em cima, mudar?*/
@@ -170,10 +288,76 @@ footer {
 
     .menu-lateral .nav-link {
         margin-right: 5px;
+        padding: 10px;
+        width: auto; 
+        justify-content: center;
     }
 
     .conteudo-principal {
         padding: 15px;
     }
 
+    .conteudo-principal .navbar {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .indicador-numero {
+        font-size: 28px;
+    }
+
+}
+
+@media (max-width: 480px) { /*para telas até 480px*/
+    .menu-lateral .nav-link {
+        font-size: 13px;
+        padding: 8px;
+        width: 48%; 
+        justify-content: flex-start;
+    }
+
+    .conteudo-principal {
+        padding: 12px;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+
+    .navbar-brand {
+        font-size: 17px;
+    }
+
+    .table-responsive .table {
+        min-width: 600px;
+    }
+
+    .indicador-numero {
+        font-size: 25px;
+    }
+}
+
+/*Acabamento geral/final*/
+
+.conteudo-principal > header {
+    margin-bottom: 25px;
+}
+
+.conteudo-principal h2, .conteudo-principal h3, .conteudo-principal h4 {
+    color: var(--cor-azul-escuro);
+    font-weight: bold;
+}
+
+.table-responsive {
+    border-radius: 10px;
+    overflow-x: auto;
+}
+
+.card, .btn, .form-control, .form-select {
+    transition: all 0.2s ease;
+}
+
+.menu-lateral .nav-link:focus-visible, .btn:focus-visible {
+    outline: 3px solid var(--cor-laranja);
+    outline-offset: 3px;
 }
