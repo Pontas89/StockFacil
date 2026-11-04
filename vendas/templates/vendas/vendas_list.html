@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ListVendas</title>
+</head>
+<body>
+    <div>
+        <h1>Listar Vendas</h1>
+        <ul>
+            <a href="{% url 'vendas:vendas_create' %}" class="btn btn-warning">Nova Venda</a>
+            {% for venda in vendas %}
+                <a href="{% url 'vendas:vendas_update' venda.pk %}" class="btn btn-warning">Editar Venda</a>
+                <a href="{% url 'vendas:vendas_delete' venda.pk %}" class="btn btn-sm btn-danger">Excluir Venda</a>
+                <li>{{ venda }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

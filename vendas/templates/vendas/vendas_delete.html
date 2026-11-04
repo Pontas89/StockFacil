@@ -1,0 +1,11 @@
+{% block title %}EXCLUIR VENDA{% endblock %}
+
+{% block content %}
+    <h1>Deseja excluir {{ venda }}?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sim, excluir</button>
+    </form>
+{% endblock %}
+<a href="{% url 'vendas:vendas_list' %}" class="btn btn-secondary">Cancelar</a>
+

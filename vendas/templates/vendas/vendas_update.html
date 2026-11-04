@@ -1,0 +1,5 @@
+<form method="post" action="{% url 'vendas:vendas_update' vendas.pk %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Atualizar Venda</button>
+    <a href="{% url 'vendas:vendas_list' %}" class="btn btn-secondary">Cancelar</a>
