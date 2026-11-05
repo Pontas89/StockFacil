@@ -22,3 +22,6 @@ staticfiles/
 # Editores
 .vscode/
 .idea/
+
+# Ignorar pasta de arquivos enviados pelos usuários (Media)
+media/
