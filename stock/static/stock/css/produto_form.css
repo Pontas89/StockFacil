@@ -120,3 +120,23 @@ main form ul.errorlist {
         font-size: 23px;
     }
 }
+
+/* DETALHES VISUAIS */
+
+/* Borda formulário */
+main form {
+    border: 1px solid #e5e9f3;
+}
+
+/* Destaque ao passar o mouse */
+main form input:not([type="checkbox"]):not([type="radio"]):hover,
+main form select:hover,
+main form textarea:hover {
+    border-color: #a5b4fc;
+}
+
+/* Foco do botão para navegação pelo teclado */
+main form button[type="submit"]:focus-visible {
+    outline: 3px solid rgba(53, 76, 193, 0.3);
+    outline-offset: 3px;
+}

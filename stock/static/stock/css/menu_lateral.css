@@ -1,9 +1,8 @@
-
 /* SIDEBAR */
 
 .sidebar {
     width: 72px;
-    min-width: 72px;
+    /*min-width: 72px;*/
     min-height: 100%;
     background: #191c29;
 
@@ -12,7 +11,9 @@
     align-items: center;
     justify-content: space-between;
 
-    padding: 22px 10px;
+    padding: 24px 10px;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.08);
 }
 
 /* MENU */
@@ -23,59 +24,69 @@
     flex-direction: column;
     align-items: center;
     gap: 18px;
+    width: 100%;
 }
 
 /* LINKS */
 
 .sidebar-link {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    color: #9298aa;
+    color: #9ca5be; 
     text-decoration: none;
 
-    border-radius: 11px;
-    font-size: 19px;
+    border-radius: 14px;
+    font-size: 22px;
 
-    transition: all 0.2s ease;
+    transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 /* HOVER */
 
 .sidebar-link:hover {
-    background: #30364a;
+    background: #343b61; /*30364a*/
     color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* ITEM ATIVO */
+/*ACESSIBILIDADE*/
 
-.sidebar-link.active {
-    background: #354cc1;
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(53, 76, 193, 0.25);
+.sidebar-link:focus-visible {
+    outline: 2px solid #a5b4fc;
+    outline-offset: 3px;
 }
 
 /* RESPONSIVIDADE */
 
 @media (max-width: 767px) {
     .sidebar {
-        width: 100%;
-        min-width: 100%;
-        min-height: auto;
-
-        flex-direction: row;
-        justify-content: center;
-
-        padding: 10px;
+        width: 56px;
+        min-width: 56px;
+        min-height: calc(100vh - 112px);
+        padding: 18px 6px;
     }
 
     .sidebar-menu,
     .sidebar-bottom {
-        flex-direction: row;
         gap: 12px;
+    }
+
+    .sidebar-link {
+        width: 42px;
+        height: 42px;
+        font-size: 19px;
+        border-radius: 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sidebar-link {
+        transition: none;
     }
 }

@@ -1,4 +1,3 @@
-
 /* ========================================
    CONFIGURAÇÃO GERAL
 ======================================== */
@@ -31,7 +30,7 @@
     letter-spacing: -0.8px;
 }
 
-.pessoa-header > div:first-child > span {
+.pessoa-header>div:first-child>span {
     color: #64748b;
     font-size: 14px;
 }
@@ -50,9 +49,9 @@
 }
 
 .pessoa-user > span {
-    color: #64748b;
-    font-size: 13px;
-    font-weight: 500;
+    color: #334155;
+    font-size: 15px;
+    font-weight: 650;
     white-space: nowrap;
 }
 
@@ -150,6 +149,7 @@
 .pessoa-item:hover {
     border-color: #c7d2fe;
     box-shadow: 0 5px 16px rgba(30, 41, 59, 0.06);
+    transform: translateY(-2px);
 }
 
 .pessoa-nome {
@@ -292,4 +292,19 @@
     .pessoa-paginacao {
         flex-wrap: wrap;
     }
+}
+
+
+/* ===== DETALHES VISUAIS ===== */
+
+/* Destaque ao passar o mouse no card */
+.pessoa-item:hover .pessoa-nome {
+    color: #4338ca;
+}
+
+/* Foco visível nos botões */
+.pessoa-page a:focus-visible,
+.pessoa-page button:focus-visible {
+    outline: 3px solid rgba(79, 70, 229, 0.3);
+    outline-offset: 3px;
 }
