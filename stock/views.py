@@ -50,6 +50,15 @@ class ProdutoListar(ListView):
     context_object_name = "produtos"
     paginate_by = 10
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        busca = self.request.GET.get('q', '').strip()
+
+        if busca:
+            queryset = queryset.filter(nome_produto__icontains=busca) # Icontains: Filtra os produtos pelo nome_produto, ignorando maiúsculas e minúsculas.
+
+        return queryset
+
 class ProdutoCriar(CreateView):
     model = Produto
     form_class = ProdutoForm

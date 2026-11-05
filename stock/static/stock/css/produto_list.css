@@ -1,382 +1,408 @@
+/* ========== 1. BÁSICO ========== */
 
-/* =========================================
-   1. CONFIGURAÇÃO GERAL
-========================================= */
+* {
+    box-sizing: border-box;      /* padding e borda ficam DENTRO da largura */
+}
 
+/* Troque as cores do site mudando só estas linhas */
+:root {
+    --marinho: #0b1f3a;          /* azul marinho principal */
+    --marinho-escuro: #07152a;
+    --azul-claro: #e8eef7;       /* fundo de botões suaves */
+    --cor-texto: #1f2937;
+    --cor-texto-suave: #6b7280;
+    --cor-fundo: #f3f5f9;
+    --cor-borda: #e3e8ef;
+    --verde: #16a34a;
+    --vermelho: #dc2626;
+}
+
+/* Tira a "margem branca": a página inteira usa a mesma cor de fundo */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Se o base.html usa .container do Bootstrap, isto remove o branco dele */
+.container,
+.container-fluid,
 main {
-    background: #f4f5f9;
-    min-height: 100%;
-    padding: 30px !important;
-    color: #25283b;
-    font-family: Arial, sans-serif;
+    background-color: transparent !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
-main > h1 {
-    color: #25283b;
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.7px;
-    margin-bottom: 8px;
+/* Nossa página: largura máxima e centralizada */
+.pagina-produtos {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 24px 20px;
 }
 
-/* =========================================
-   2. USUÁRIO E BOTÃO SAIR
-========================================= */
 
-main > span {
-    display: inline-block;
-    color: #777d8e;
-    font-size: 14px;
-    margin-bottom: 20px;
-    vertical-align: middle;
-}
+/* ========== 2. TOPO (faixa azul marinho) ========== */
 
-main > form[action*="logout"] {
-    display: inline-flex !important;
-    width: auto !important;
-    max-width: max-content !important;
-    height: auto !important;
-    min-height: 0 !important;
-    margin: 0 0 20px 12px !important;
-    padding: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    vertical-align: middle;
-}
+.topo {
+    background: linear-gradient(135deg, var(--marinho), #17376b);
+    color: #ffffff;
+    padding: 28px 30px;
+    border-radius: 16px;
+    margin-bottom: 28px;
 
-main > form[action*="logout"] button {
-    width: auto !important;
-    min-width: 0 !important;
-    min-height: 0 !important;
-    height: auto !important;
-    padding: 8px 14px !important;
-    margin: 0 !important;
-
-    background: #fff !important;
-    color: #e05252 !important;
-    border: 1px solid #f0dada !important;
-    border-radius: 8px !important;
-
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    box-shadow: none !important;
-    cursor: pointer;
-    transition: .2s;
-}
-
-main > form[action*="logout"] button:hover {
-    background: #fff0f0 !important;
-}
-
-/* =========================================
-   3. BOTÃO NOVO PRODUTO
-========================================= */
-
-main > a.btn-warning {
-    display: inline-flex;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-
-    padding: 10px 17px;
-    margin-bottom: 22px;
-
-    background: #3f51b5;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-
-    transition: .2s;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
-main > a.btn-warning:hover {
-    background: #303f9f;
-    color: white;
-    transform: translateY(-2px);
+.topo h1 {
+    margin: 0 0 6px 0;
+    font-size: 28px;
 }
 
-/* =========================================
-   4. LAYOUT DA LOJA
-========================================= */
+.produto-usuario {
+    margin: 0;
+    opacity: 0.8;
+    font-size: 15px;
+}
+
+
+/* ========== 3. LAYOUT (grid de 2 colunas) ========== */
 
 .loja-layout {
-    display: flex;
-    align-items: flex-start;
-    gap: 22px;
-}
-
-/* Área dos produtos */
-.loja-layout > .produtos-grid {
-    flex: 1 1 0;
-    min-width: 0;
-    max-width: none;
-
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-
-    padding: 0;
+    grid-template-columns: 1fr 300px;   /* produtos + carrinho */
+    gap: 24px;
 }
 
-/* Área do carrinho */
-.loja-layout > .carrinho-painel {
-    flex: 0 0 280px;
-    max-width: 280px;
-    min-width: 0;
+
+/* ========== 4. GRADE DE PRODUTOS ========== */
+
+.produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
 }
 
-/* =========================================
-   5. CARDS DOS PRODUTOS
-========================================= */
-
-.produtos-grid .card {
-    overflow: hidden;
-    height: 100%;
-
-    background: #fff;
-    border: 1px solid #eaebf1;
-    border-radius: 12px;
-
-    box-shadow: 0 2px 8px rgba(30, 40, 70, .035);
-    transition: .2s ease;
+.produtos-grid .col-12 {
+    grid-column: 1 / -1;          /* ocupa a linha toda */
+    text-align: center;
+    padding: 50px 20px;
+    background: #ffffff;
+    border-radius: 14px;
+    color: var(--cor-texto-suave);
 }
 
-.produtos-grid .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 18px rgba(30, 40, 70, .09);
-    border-color: #d9def5;
+.produtos-grid .col-12 i {
+    display: block;
+    font-size: 40px;
+    margin-bottom: 10px;
 }
 
-/* Imagem do produto */
-.produtos-grid .card-img-top {
-    width: 100%;
-    height: 155px;
-    object-fit: contain;
-    padding: 12px;
-    background: #fff;
-}
 
-/* Conteúdo */
-.produtos-grid .card-body {
+/* ========== 5. CARD DO PRODUTO ========== */
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid var(--cor-borda);
+    border-radius: 14px;
+    overflow: hidden;             /* imagem respeita a borda redonda */
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    gap: 9px;
-    padding: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.produtos-grid .card-title {
-    margin: 0;
-    color: #292d40;
-    font-size: 15px;
-    font-weight: 700;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(11, 31, 58, 0.12);
 }
 
-.produtos-grid .card-text {
-    margin: 0 0 5px;
-    color: #3f51b5;
-    font-size: 16px;
-    font-weight: 700;
+.card-img-top {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
 }
 
-/* =========================================
-   6. BOTÕES DOS CARDS
-========================================= */
-
-.produtos-grid .card-body .btn {
+/* Quando o produto não tem foto */
+.card-sem-imagem {
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--azul-claro);
+    color: #9db0cc;
+    font-size: 48px;
+}
 
-    width: 100%;
-    padding: 9px 10px;
+.card-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;                 /* cards com a mesma altura */
+}
 
-    border-radius: 7px;
-    font-size: 12px;
+.card-title {
+    font-size: 17px;
     font-weight: 600;
-
-    transition: .2s;
+    margin: 0 0 8px 0;
+    color: var(--marinho);
 }
 
-/* Adicionar ao carrinho */
-.produtos-grid .btn-adicionar {
-    background: #3f51b5;
-    color: #fff;
-    border: 1px solid #3f51b5;
+.card-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--verde);
+    margin: 0 0 16px 0;
 }
 
-.produtos-grid .btn-adicionar:hover {
-    background: #303f9f;
-    border-color: #303f9f;
+/* Linha com Editar / Excluir */
+.card-acoes {
+    display: flex;
+    gap: 8px;
 }
 
-/* Editar */
-.produtos-grid .card-body a.btn-primary {
-    background: #eef0fc;
-    color: #3f51b5;
-    border: 1px solid #dce1fa;
+.card-acoes .btn {
+    flex: 1;                      /* os dois botões dividem o espaço */
 }
 
-.produtos-grid .card-body a.btn-primary:hover {
-    background: #e0e5fb;
+
+/* ========== 6. BOTÕES ========== */
+
+.btn {
+    display: inline-flex;         /* alinha ícone e texto */
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
 }
 
-/* Excluir */
-.produtos-grid .card-body a.btn-danger {
-    background: #fff0f0;
-    color: #d94b4b;
-    border: 1px solid #f5dada;
+.btn:active {
+    transform: scale(0.97);       /* efeito de "apertar" */
 }
 
-.produtos-grid .card-body a.btn-danger:hover {
-    background: #ffe3e3;
+/* Principal: azul marinho */
+.btn-primary {
+    background-color: var(--marinho);
+    color: #ffffff;
 }
 
-/* =========================================
-   7. CARRINHO
-========================================= */
+.btn-primary:hover {
+    background-color: var(--marinho-escuro);
+    color: #ffffff;
+}
+
+.btn-adicionar {
+    width: 100%;
+    margin-top: auto;             /* empurra para o fim do card */
+    margin-bottom: 10px;
+}
+
+.btn-sm {
+    padding: 7px 10px;
+    font-size: 13px;
+}
+
+/* Editar: azul clarinho */
+.btn-editar {
+    background-color: var(--azul-claro);
+    color: var(--marinho);
+}
+
+.btn-editar:hover {
+    background-color: #d5e0f0;
+    color: var(--marinho);
+}
+
+/* Excluir: vermelho suave */
+.btn-danger {
+    background-color: #fdecec;
+    color: var(--vermelho);
+}
+
+.btn-danger:hover {
+    background-color: #fbd5d5;
+    color: var(--vermelho);
+}
+
+/* Novo produto: branco no fundo azul */
+.btn-warning {
+    background-color: #ffffff;
+    color: var(--marinho);
+}
+
+.btn-warning:hover {
+    background-color: var(--azul-claro);
+    color: var(--marinho);
+}
+
+
+/* ========== 7. CARRINHO ========== */
 
 .carrinho-painel {
-    position: sticky;
-    top: 20px;
-
+    background-color: #ffffff;
+    border: 1px solid var(--cor-borda);
+    border-radius: 14px;
     padding: 20px;
-
-    background: #fff;
-    border: 1px solid #eaebf1;
-    border-radius: 12px;
-
-    box-shadow: 0 2px 8px rgba(30, 40, 70, .035);
+    position: sticky;             /* acompanha a rolagem */
+    top: 20px;
+    align-self: start;
 }
 
 .carrinho-painel h4 {
-    color: #292d40;
+    margin: 0 0 16px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--cor-borda);
+    color: var(--marinho);
     font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 20px;
 }
 
-/* Lista de produtos no carrinho */
-#carrinho-lista {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-
+.list-group {
+    list-style: none;
+    margin: 0;
     padding: 0;
+}
+
+.list-group li,
+.list-group-item {
+    padding: 10px 0;
     border: none;
+    border-bottom: 1px dashed var(--cor-borda);
+    font-size: 14px;
 }
 
-#carrinho-lista li {
-    padding: 12px;
-
-    background: #f6f7fb;
-    border: 1px solid #eceef4;
-    border-radius: 8px;
-
-    color: #555b6e;
-    font-size: 12px;
-}
-
-/* Botão remover */
-#carrinho-lista .btn-remover {
-    width: 100%;
-    padding: 7px;
-
-    background: #fff0f0;
-    color: #d94b4b;
-    border: none;
-    border-radius: 6px;
-
-    font-size: 12px;
-    font-weight: 600;
-}
-
-#carrinho-lista .btn-remover:hover {
-    background: #ffe1e1;
-}
-
-/* Total */
 #total-compra {
-    margin-top: 20px;
-    padding-top: 15px;
-
-    border-top: 1px solid #eaebf1;
-
-    color: #303f9f;
-    font-size: 17px;
-    font-weight: 700;
+    margin: 16px 0 0 0;
+    padding: 14px;
+    background-color: var(--marinho);
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
 }
 
-/* =========================================
-   8. PAGINAÇÃO
-========================================= */
 
-main nav {
+/* ========== 8. PAGINAÇÃO ========== */
+
+.paginacao {
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin-top: 25px;
+    align-items: center;
+    gap: 14px;
+    margin-top: 32px;
 }
 
-main nav a {
-    border-radius: 7px;
-    font-size: 12px;
-    font-weight: 600;
+.pagina-info {
+    color: var(--cor-texto-suave);
+    font-size: 14px;
 }
 
-main nav span {
-    color: #777d8e;
-    font-size: 13px;
+.btn-outline-primary {
+    background-color: transparent;
+    border: 2px solid var(--marinho);
+    color: var(--marinho);
 }
 
-/* =========================================
-   9. RESPONSIVIDADE
-========================================= */
-
-@media (max-width: 1100px) {
-    .loja-layout > .produtos-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .loja-layout > .carrinho-painel {
-        flex-basis: 250px;
-        max-width: 250px;
-    }
+.btn-outline-primary:hover {
+    background-color: var(--marinho);
+    color: #ffffff;
 }
 
-@media (max-width: 767px) {
-    main {
-        padding: 20px !important;
-    }
 
+/* ========== 9. RESPONSIVO (media query) ========== */
+
+/* Tablet: carrinho desce para baixo dos produtos */
+@media (max-width: 900px) {
     .loja-layout {
-        flex-direction: column;
-    }
-
-    .loja-layout > .produtos-grid {
-        width: 100%;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .loja-layout > .carrinho-painel {
-        position: static;
-        width: 100%;
-        max-width: none;
-        flex-basis: auto;
-    }
-}
-
-@media (max-width: 480px) {
-    .loja-layout > .produtos-grid {
         grid-template-columns: 1fr;
     }
 
-    main > h1 {
-        font-size: 24px;
+    .carrinho-painel {
+        position: static;
     }
+}
+
+/* Celular: 2 produtos por linha, tudo mais compacto */
+@media (max-width: 500px) {
+    .pagina-produtos {
+        padding: 12px;
+    }
+
+    .topo {
+        padding: 20px;
+    }
+
+    .topo h1 {
+        font-size: 22px;
+    }
+
+    .produtos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .card-img-top,
+    .card-sem-imagem {
+        height: 120px;
+    }
+
+    .card-body {
+        padding: 12px;
+    }
+
+    .card-acoes {
+        flex-direction: column;
+    }
+}
+
+.topo h1 {
+    color: white;
+}
+
+/* ========== BUSCA ========== */
+
+.busca-info {
+    display: flex;
+    justify-content: space-between;   /* texto à esquerda, botão à direita */
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;                  /* no celular, quebra a linha */
+
+    background-color: #ffffff;
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 20px;              /* espaço antes dos cards */
+    font-size: 14px;
+}
+
+.busca-info a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background-color: #fdecec;
+    color: var(--vermelho);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.busca-info a:hover {
+    background-color: #fbd5d5;
 }
