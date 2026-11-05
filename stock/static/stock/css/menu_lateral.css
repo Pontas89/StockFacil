@@ -1,0 +1,81 @@
+
+/* SIDEBAR */
+
+.sidebar {
+    width: 72px;
+    min-width: 72px;
+    min-height: 100%;
+    background: #191c29;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px 10px;
+}
+
+/* MENU */
+
+.sidebar-menu,
+.sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+/* LINKS */
+
+.sidebar-link {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #9298aa;
+    text-decoration: none;
+
+    border-radius: 11px;
+    font-size: 19px;
+
+    transition: all 0.2s ease;
+}
+
+/* HOVER */
+
+.sidebar-link:hover {
+    background: #30364a;
+    color: #ffffff;
+}
+
+/* ITEM ATIVO */
+
+.sidebar-link.active {
+    background: #354cc1;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(53, 76, 193, 0.25);
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 767px) {
+    .sidebar {
+        width: 100%;
+        min-width: 100%;
+        min-height: auto;
+
+        flex-direction: row;
+        justify-content: center;
+
+        padding: 10px;
+    }
+
+    .sidebar-menu,
+    .sidebar-bottom {
+        flex-direction: row;
+        gap: 12px;
+    }
+}

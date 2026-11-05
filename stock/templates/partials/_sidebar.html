@@ -1,11 +1,29 @@
-<aside class="col-md-3 col-lg-2 bg-light border-end py-4">
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            {# troque courses pelo nome do seu app #}
-            <a href="{% url 'stock:pessoa_list' %}" class="nav-link">Pessoas</a>
-        </li>
-        <li class="nav-item">
-            <a href="{% url 'admin:index' %}" class="nav-link">Admin</a>
-        </li>
-    </ul>
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'stock/css/menu_lateral.css' %}">
+{% endblock %}
+
+<aside class="sidebar">
+    <nav class="sidebar-menu">
+
+        <a href="{% url 'stock:pessoa_list' %}" class="sidebar-link" title="Pessoas">
+            <i class="bi bi-people"></i>
+        </a>
+
+        <a href="{% url 'stock:produto_listar' %}" class="sidebar-link" title="Produtos">
+            <i class="bi bi-box-seam"></i>
+        </a>
+
+        <a href="{% url 'admin:index' %}" class="sidebar-link" title="Admin">
+            <i class="bi bi-gear"></i>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+        <a href="#" class="sidebar-link" title="Configurações">
+            <i class="bi bi-sliders"></i>
+        </a>
+    </div>
 </aside>

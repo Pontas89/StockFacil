@@ -1,44 +1,102 @@
+
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Pessoas{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'stock/css/pessoa_list.css' %}">
+{% endblock %}
+
 {% block content %}
-     <h1>Pessoas</h1>
-    <span>Olá, {{ user.username }}</span>
-    <form method="post" action="{% url 'accounts:logout' %}">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-sm btn-outline-secondary">Sair</button>
-    </form>
-    {# troque courses pelo nome do seu app #}
+
+<div class="pessoa-page">
+
+    <div class="pessoa-header">
+        <div>
+            <h1>Pessoas</h1>
+            <span>Verifique as pessoas cadastradas no sistema.</span>
+        </div>
+
+        <div class="pessoa-user">
+            <span>Olá, {{ user.username }}</span>
+
+            <form method="post" action="{% url 'accounts:logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-sair">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Sair
+                </button>
+            </form>
+        </div>
+    </div>
+
     {% if perms.stock.add_person %}
-        <a href="{% url 'stock:pessoa_create' %}" class="btn btn-warning">Nova pessoa</a>
+    <div class="pessoa-actions">
+        <a href="{% url 'stock:pessoa_create' %}" class="btn-nova-pessoa">
+            <i class="bi bi-plus-lg"></i>
+            Nova pessoa
+        </a>
+    </div>
     {% endif %}
 
-    <ul>
+    <ul class="pessoa-lista">
         {% for person in object_list %}
-            <li>
+        <li class="pessoa-item">
+
+            <span class="pessoa-nome">
                 {{ person.first_name }} {{ person.last_name }}
-                {% if perms.courses.change_course %}
-                    <a href="{% url 'stock:pessoa_update' person.pk %}" class="btn btn-sm btn-primary">Editar</a>
+            </span>
+
+            <div class="pessoa-acoes">
+                {% if perms.stock.change_person %}
+                <a href="{% url 'stock:pessoa_update' person.pk %}"
+                   class="btn-editar">
+                    <i class="bi bi-pencil"></i>
+                    Editar
+                </a>
                 {% endif %}
-                {% if perms.courses.delete_course %}
-                    <a href="{% url 'stock:pessoa_delete' person.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+
+                {% if perms.stock.delete_person %}
+                <a href="{% url 'stock:pessoa_delete' person.pk %}"
+                   class="btn-excluir">
+                    <i class="bi bi-trash"></i>
+                    Excluir
+                </a>
                 {% endif %}
-            </li>
+            </div>
+
+        </li>
+
         {% empty %}
-            <li>Nenhuma pessoa cadastrada.</li>
+        <li class="pessoa-item pessoa-vazia">
+            Nenhuma pessoa cadastrada.
+        </li>
         {% endfor %}
     </ul>
 
     {% if is_paginated %}
-        <nav class="d-flex align-items-center gap-2">
-            {% if page_obj.has_previous %}
-                <a href="{% querystring page=page_obj.previous_page_number %}" class="btn btn-sm btn-outline-primary">Anterior</a>
-            {% endif %}
-            <span class="text-muted small">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
-            {% if page_obj.has_next %}
-                <a href="{% querystring page=page_obj.next_page_number %}" class="btn btn-sm btn-outline-primary">Próxima</a>
-            {% endif %}
-        </nav>
+    <nav class="pessoa-paginacao">
+
+        {% if page_obj.has_previous %}
+        <a href="{% querystring page=page_obj.previous_page_number %}">
+            Anterior
+        </a>
+        {% endif %}
+
+        <span>
+            Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="{% querystring page=page_obj.next_page_number %}">
+            Próxima
+        </a>
+        {% endif %}
+
+    </nav>
     {% endif %}
+
+</div>
+
 {% endblock %}

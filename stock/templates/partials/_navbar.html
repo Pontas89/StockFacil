@@ -1,9 +1,48 @@
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-        {# troque courses pelo nome do seu app #}
-        <a href="{% url 'stock:pessoa_list' %}" class="navbar-brand">StockFacil 🛒</a>
-        {% if user.is_authenticated %}
-            <span class="navbar-text text-white">Olá, {{ user.username }}!</span>
-        {% endif %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'stock:produto_listar' %}">StockFacil 🛒</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvas" aria-controls="navbarOffcanvas" aria-label="Abrir menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="navbarOffcanvas" aria-labelledby="navbarOffcanvasLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="navbarOffcanvasLabel">Menu</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Fechar"></button>
+      </div>
+
+      <div class="offcanvas-body">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'produto_listar' %}active{% endif %}" href="{% url 'stock:produto_listar' %}">Produtos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.resolver_match.url_name == 'produto_criar' %}active{% endif %}" href="{% url 'stock:produto_criar' %}">Vender</a>
+          </li>
+
+          {% if user.is_authenticated %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ user.username }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <form method="post" action="{% url 'accounts:logout' %}">
+                  {% csrf_token %}
+                  <button type="submit" class="dropdown-item">Sair</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+          {% endif %}
+        </ul>
+
+        <form class="d-flex gap-2" role="search">
+          <input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar">
+          <button class="btn btn-outline-light" type="submit">Buscar</button>
+        </form>
+      </div>
     </div>
+  </div>
 </nav>

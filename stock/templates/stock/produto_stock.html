@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Produtos{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'stock/css/produto_list.css' %}">
+{% endblock %}
+{% block content %}
+     <h1>Produtos</h1>
+   <div class="produto-usuario">
+    <span>Olá, {{ user.username }}! 😎</span>
+
+</div>
+
+    {% if perms.stock.add_produto %}
+        <a href="{% url 'stock:produto_criar' %}" class="btn btn-warning">Novo produto</a>
+    {% endif %}
+
+    <div class="row loja-layout">
+    <!-- Coluna dos produtos -->
+            <div class="col-md-10 produtos-grid">
+                {% for produto in produtos %}
+            <div class="card h-100">
+        {% if produto.imagem_produto %}
+      <img src="{{ produto.imagem_produto.url }}" class="card-img-top" alt="{{ produto.nome_produto }}">
+      {% endif %}
+      <div class="card-body">
+        <h4 class="card-title">{{ produto.nome_produto }}</h4>
+        <p class="card-text">R$ {{produto.preco_produto}}</p>
+        <button class="btn btn-primary btn-adicionar" type="button"
+        data-id="{{produto.pk}}"
+        data-nome = "{{produto.nome_produto}}"
+        data-preco = "{{produto.preco_produto}}"
+        data-quantidade = "{{produto.quantidade_produto}}"
+        >
+        Adicionar ao Carrinho</button>
+
+        {% if perms.stock.change_produto %}
+                    <a href="{% url 'stock:produto_editar' produto.pk %}" class="btn btn-sm btn-primary">Editar</a>
+                {% endif %}
+                {% if perms.stock.delete_produto %}
+                    <a href="{% url 'stock:produto_deletar' produto.pk %}" class="btn btn-sm btn-danger">Excluir</a>
+                {% endif %}
+        </div>
+    </div>
+               
+                {% empty %}
+            <div class="col-12">Nenhum produto cadastrado.</div>
+        {% endfor %}
+    </div>
+
+    <!-- Coluna do Carrinho-->
+     <div class="col-md-2 carrinho-painel">
+            <h4>Meu Carrinho:</h4>
+
+            <ul class="list-group" id="carrinho-lista">
+
+            </ul>
+            
+            <p id="total-compra">Total: R$0,00</p>
+    
+    </div>
+        
+
+    {% if is_paginated %}
+        <nav class="d-flex align-items-center gap-2">
+            {% if page_obj.has_previous %}
+                <a href="{% querystring page=page_obj.previous_page_number %}" class="btn btn-sm btn-outline-primary">Anterior</a>
+            {% endif %}
+            <span class="text-muted small">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+                <a href="{% querystring page=page_obj.next_page_number %}" class="btn btn-sm btn-outline-primary">Próxima</a>
+            {% endif %}
+        </nav>
+    {% endif %}
+
+    <script src="{% static 'js/carrinho.js' %}"></script>
+{% endblock %}

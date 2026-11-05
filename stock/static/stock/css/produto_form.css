@@ -1,0 +1,122 @@
+
+/* =================================
+   CADASTRO DE PRODUTO
+================================= */
+
+main {
+    background-color: #eef1fa;
+}
+
+main h1 {
+    color: #20243a;
+    font-size: 28px;
+    font-weight: 750;
+    margin-bottom: 28px;
+}
+
+/* Formulário */
+
+main form {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 35px;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 6px 25px rgba(36, 48, 90, 0.07);
+}
+
+/* Campos gerados pelo Django */
+
+main form p {
+    margin-bottom: 22px;
+}
+
+main form label {
+    display: block;
+    margin-bottom: 9px;
+    color: #30364b;
+    font-size: 14px;
+    font-weight: 650;
+}
+
+/* Inputs */
+
+main form input:not([type="checkbox"]):not([type="radio"]),
+main form select,
+main form textarea {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #dce1ed;
+    border-radius: 10px;
+    background-color: #f9faff;
+    color: #252a40;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* Foco nos campos */
+
+main form input:focus,
+main form select:focus,
+main form textarea:focus {
+    border-color: #354cc1;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(53, 76, 193, 0.12);
+}
+
+/* Campo de imagem */
+
+main form input[type="file"] {
+    padding: 12px;
+    background-color: #f4f6fc;
+    cursor: pointer;
+}
+
+/* Botão salvar */
+
+main form button[type="submit"] {
+    width: 100%;
+    margin-top: 12px;
+    padding: 13px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: #354cc1;
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    transition: all 0.2s ease;
+}
+
+main form button[type="submit"]:hover {
+    background-color: #293da5;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 14px rgba(53, 76, 193, 0.2);
+}
+
+/* Mensagens de erro */
+
+main form ul.errorlist {
+    padding: 0;
+    margin: 5px 0 10px;
+    list-style: none;
+    color: #dc3545;
+    font-size: 13px;
+}
+
+/* Responsividade */
+
+@media (max-width: 767px) {
+    main form {
+        padding: 22px;
+    }
+
+    main h1 {
+        font-size: 23px;
+    }
+}
